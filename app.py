@@ -9,14 +9,19 @@ import uvicorn
 app = FastAPI();
 a_db = AssertDB("banco.db");
 
+origins = [
+    "https://teste-vite-9owap1e4x-erbert-gadelha.vercel.app/",
+    "*"
+]
+
 app.add_middleware(
     CORSMiddleware,
     allow_methods=["*"],
     allow_headers=["*"],
     allow_credentials=True,
-    #allow_origins=["http://localhost:3000"]
-    allow_origins=["*"]
+    allow_origins=origins,
 )
+
 
 if __name__ == '__main__':
     uvicorn.run(app, host='0.0.0.0', port=7777);
