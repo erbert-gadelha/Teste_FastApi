@@ -29,7 +29,7 @@ if __name__ == '__main__':
 @app.get('/')
 async def Home():
     retorno = 'DEFINICAO DAS ROTAS\nsearch\tget :{url}/search?tags={tags separadas por vircula}\npost  \tget :{url}/post?ids={identificador numerico dos posts separados por virgula}\npost  \tpost:{url}/post {data é um dicionario com campos[user, title, body, tags]}\nall   \tget :{url}/allsettle\tget :{url}/settle'
-    return terorno
+    return retorno
 
 @app.get('/search')
 async def SearchTags(tags: str = Query(...)):
