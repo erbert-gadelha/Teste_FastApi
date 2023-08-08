@@ -11,6 +11,7 @@ a_db = AssertDB("banco.db");
 
 origins = [
     "https://teste-vite-9owap1e4x-erbert-gadelha.vercel.app",
+    "https://teste-vite-tau.vercel.app"
 ]
 
 app.add_middleware(
