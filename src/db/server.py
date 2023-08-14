@@ -1,19 +1,18 @@
 import sqlite3;
-from CreatePost import CreatePost;
-from SearchPost import SearchPost;
+from src.db.CreatePost import CreatePost;
+from src.db.SearchPost import SearchPost;
 
-class AssertDB:
+
+class server_bd:
     
     def __init__(self, url):
         self._con = sqlite3.connect(url);
         self._cur = self._con.cursor();
-
-        self.c_post = CreatePost(self.cur);
-        self.s_post = SearchPost(self.cur);
     
         try:        
             self._cur.execute('SELECT * FROM post');
             self._cur.execute('SELECT * FROM post_tag');
+            print("[sucesso] Conectado ao banco com sucesso."); 
         except sqlite3.OperationalError:
 
             try:
@@ -29,6 +28,10 @@ class AssertDB:
             self._cur.execute('CREATE TABLE post_tag (post, tag)');
             
             print("[aviso] Tabela 'post' e 'post_tag' foram criadas.");
+            self.settle()
+        
+        self.c_post = CreatePost(self.cur);
+        self.s_post = SearchPost(self.cur);
     
     def settle(self):
         self._cur.execute('SELECT * FROM post');
@@ -70,14 +73,6 @@ class AssertDB:
         return self.s_post.getTags(self.cur)
 
 
-
-
-
-
-
-
-
-
     @property
     def con(self):
         return self._con;
@@ -93,3 +88,5 @@ class AssertDB:
     @cur.setter
     def cur(self, param):
         return None;
+
+server_ = server_bd("banco.db");

@@ -11,7 +11,13 @@ class SearchPost:
             tags_ = tags_ + (' INNER JOIN post_tag TAG{0} ON PT.post = TAG{0}.post AND TAG{0}.tag = "{1}"'.format(index, tags[index]));
         
         cursor.execute('SELECT PT.post FROM post_tag PT ' + tags_ + 'GROUP BY PT.post ORDER BY PT.post DESC');
-        return cursor.fetchall();
+        
+        retorno = []
+        for post in cursor.fetchall():
+            retorno.append(post[0]);
+        
+        print(retorno)
+        return retorno;
 
     def getPosts(self, ids, cursor):
         ids_ = 'id = {0}'.format(ids[0]);
